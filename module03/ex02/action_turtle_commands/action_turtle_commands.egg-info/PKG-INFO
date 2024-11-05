@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: action_turtle_commands
+Version: 0.0.0
+Summary: TODO: Package description
+Maintainer: cerberus
+Maintainer-email: edikchermenin@gmail.com
+License: Apache-2.0
+License-File: LICENSE
+Requires-Dist: setuptools
