@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="imu">
+
+
+    <link name="imu_sensor_link">
+        <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.02" />
+        <inertia ixx="${(1/12) * (0.05*0.05 + 0.035*0.035)}" ixy="0.0" ixz="0.0"
+                 iyy="${(1/12) * (0.02*0.02 + 0.05*0.05)}" iyz="0.0"
+                 izz="${(1/12) * (0.02*0.02 + 0.035*0.035)}" />
+    </inertial>
+    <visual>
+        <origin xyz="0 0 0"/>
+        <geometry>
+            <box size="0.02 0.05 0.035"/>
+        </geometry>
+        <material name="Grey">
+			<color rgba="0.13 0.13 0.13 1.0"/>
+		</material>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0"/>
+        <geometry>
+            <box size="0.02 0.05 0.05"/>
+        </geometry>
+    </collision>
+    </link>
+    
+    <joint name="imu_sensor_joint" type="fixed">
+        <origin xyz="0.093 0 0.12" rpy="0 0 0"/>
+        <parent link="chassis"/>
+        <child link="imu_sensor_link"/>
+    </joint>
+
+    <gazebo reference="imu_sensor_link">
+        <gravity>true</gravity>
+        <sensor name='imu_sensor' type='imu'>
+            <gz_frame_id>robot/imu_sensor_link</gz_frame_id>
+            <always_on>true</always_on>
+            <update_rate>50</update_rate>
+            <visualize>true</visualize>
+            <topic>imu</topic>
+            <pose>0 0 0 0 0 0</pose>
+        </sensor>
+    </gazebo>
+
+    <!-- <sensor name="imu_sensor" type="imu">
+        <pose>0 0 0 0 0 0</pose>
+        <update_rate>100.0</update_rate>
+        <imu>
+            <angular_velocity>
+                <x>true</x>
+                <y>true</y>
+                <z>true</z>
+            </angular_velocity>
+            <linear_acceleration>
+                <x>true</x>
+                <y>true</y>
+                <z>true</z>
+            </linear_acceleration>
+        </imu>
+        <plugin name="ros_gz_bridge_plugin" filename="libign_ros_bridge.so">
+            <ros>
+                <namespace>/imu</namespace>
+                <topic>data</topic>
+                <frame_id>imu_link</frame_id>
+            </ros>
+        </plugin>
+    </sensor> -->
+
+ 
+  
+</robot>
